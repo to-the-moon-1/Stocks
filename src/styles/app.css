@@ -1,0 +1,87 @@
+:root {
+  --font-size: 20px;
+  --padding: 15px;
+  --gainsboro: #dcdcdcff;
+  --cyan: #3e7070ff;
+  --darkcyan: #2f4f4fff;
+}
+
+* {
+  color: var(--gainsboro);
+  letter-spacing: 1px;
+}
+
+.main-content {
+  margin: 230px auto;
+  width: 1100px;
+}
+
+.header {
+  font-size: 55px;
+  margin-bottom: 25px;
+}
+
+.table {
+  background-color: var(--cyan);
+  border-collapse: collapse;
+  font-size: 18px;
+  text-align: center;
+}
+
+.thead,
+.col-index {
+  background-color: var(--gainsboro);
+  font-size: var(--font-size);
+  font-weight: bold;
+}
+
+.col {
+  border: 3px solid var(--darkcyan);
+  padding: var(--padding) 30px;
+}
+
+.col-head,
+.col-index {
+  color: var(--darkcyan);
+}
+
+.col-head {
+  padding: var(--padding) 60px;
+}
+
+.col-index {
+  padding: var(--padding) 20px;
+}
+
+.col-number {
+  padding: var(--padding) 30px;
+}
+
+.mg-top {
+  margin-top: 20px;
+}
+
+.page {
+  background-color: var(--cyan);
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: var(--font-size);
+  margin-right: 8px;
+  padding: 8px 18px;
+}
+
+.selected-page {
+  background-color: var(--gainsboro);
+  color: var(--darkcyan);
+  font-weight: bold;
+}
+
+.fa {
+  font-size: 25px;
+  font-weight: normal;
+  padding: 9px 19px;
+}
+
+.nav-page {
+  padding: 9px 16px;
+}
