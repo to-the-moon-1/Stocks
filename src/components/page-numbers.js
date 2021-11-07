@@ -10,18 +10,19 @@ const PageNumbers = ({ currentPage, onPageChanged, pageSize, financials }) => {
   }
 
   return (
-    <>
+    <ul className="list-container">
       {pageNumbers.map(number => (
-        <span
-          key={number}
-          className={currentPage === number ? 'page selected-page' : 'page'}
-          id={number}
-          onClick={onPageChanged}
-        >
-          {number}
-        </span>
+        <li key={number} className="list-style">
+          <span
+            className={currentPage === number ? 'page selected-page' : 'page'}
+            id={number}
+            onClick={onPageChanged}
+          >
+            {number}
+          </span>
+        </li>
       ))}
-    </>
+    </ul>
   );
 };
 

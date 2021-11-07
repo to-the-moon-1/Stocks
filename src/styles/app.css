@@ -61,6 +61,16 @@
   margin-top: 20px;
 }
 
+.list-container {
+  display: inline;
+  padding: 0;
+}
+
+.list-style {
+  display: inline;
+  list-style: none;
+}
+
 .page {
   background-color: var(--cyan);
   border-radius: 2px;

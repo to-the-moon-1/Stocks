@@ -19,14 +19,12 @@ const Pages = ({
 }) => (
   <div className="mg-top">
     <NavBtnLeft onFirstPage={onFirstPage} onPrevPage={onPrevPage} />
-    <span>
-      <PageNumbers
-        currentPage={currentPage}
-        financials={financials}
-        onPageChanged={onPageChanged}
-        pageSize={pageSize}
-      />
-    </span>
+    <PageNumbers
+      currentPage={currentPage}
+      financials={financials}
+      onPageChanged={onPageChanged}
+      pageSize={pageSize}
+    />
     <NavBtnRight onLastPage={onLastPage} onNextPage={onNextPage} />
   </div>
 );

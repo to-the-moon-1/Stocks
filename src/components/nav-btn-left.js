@@ -1,33 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NavBtnLeft = ({ onFirstPage, onPrevPage }) => {
-  const pagesData = [
-    {
-      name: 'onFirstPage',
-      className: 'fa fa-angle-double-left page nav-page',
-      onClick: onFirstPage,
-    },
-    {
-      name: 'onPrevPage',
-      className: 'fa fa-angle-left page',
-      onClick: onPrevPage,
-    },
-  ];
-
-  return (
-    <>
-      {pagesData.map(({ className, onClick }) => (
-        <i
-          key={className}
-          aria-hidden="true"
-          className={className}
-          onClick={onClick}
-        />
-      ))}
-    </>
-  );
-};
+const NavBtnLeft = ({ onFirstPage, onPrevPage }) => (
+  <>
+    <i
+      className="fa fa-angle-double-left page nav-page"
+      onClick={onFirstPage}
+    />
+    <i className="fa fa-angle-left page" onClick={onPrevPage} />
+  </>
+);
 
 NavBtnLeft.propTypes = {
   onFirstPage: PropTypes.func,
