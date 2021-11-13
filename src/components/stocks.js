@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as axios from 'axios';
 
-import URL from '../api/api';
-
-import { initialStocks, pageSize, totalPages } from '../consts/initial-state';
+import { baseStocks, pageSize, totalPages, URL } from '../consts/initial-state';
 
 import Table from './table';
 import Pages from './pages';
@@ -19,14 +17,19 @@ const Stocks = ({
   totalPages,
 }) => {
   useEffect(() => {
-    axios.get(URL).then(response => setStocks(response.data));
+    async function getStocks() {
+      const response = await axios.get(URL);
+      if (response.status === 200) return setStocks(response.data);
+      throw new Error(response.status);
+    }
+    getStocks();
   }, [setStocks]);
 
-  const handleOnDragEnd = result => {
-    if (!result.destination) return;
-    const items = Array.from(stocks.financials);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+  const handleOnDragEnd = ({ destination, source }) => {
+    if (!destination) return;
+    const items = stocks.financials;
+    const [reorderedItem] = items.splice(source.index, 1);
+    items.splice(destination.index, 0, reorderedItem);
     setStocksFin(items);
   };
 
@@ -46,10 +49,15 @@ const Stocks = ({
 
   const onLastPage = () => setCurrentPage(Math.ceil(totalPages / pageSize));
 
+  const idLastStock = currentPage * pageSize;
+  const idFirstStock = idLastStock - pageSize;
+  const currentStocks = stocks.financials.slice(idFirstStock, idLastStock);
+
   return (
     <div className="main-content">
       <Table
         currentPage={currentPage}
+        currentStocks={currentStocks}
         handleOnDragEnd={handleOnDragEnd}
         pageSize={pageSize}
         stocks={stocks}
@@ -96,7 +104,7 @@ Stocks.defaultProps = {
   setCurrentPage: () => {},
   setStocks: () => {},
   setStocksFin: () => {},
-  stocks: initialStocks,
+  stocks: baseStocks,
 };
 
 export default Stocks;

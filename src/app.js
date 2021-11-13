@@ -8,14 +8,12 @@ import StocksContainer from './container/stocks-container';
 import 'font-awesome/css/font-awesome.min.css';
 import './styles/app.css';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <StocksContainer />
-      </div>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <div className="App">
+      <StocksContainer />
+    </div>
+  </Provider>
+);
 
 export default App;

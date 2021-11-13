@@ -6,20 +6,22 @@ import DraggableItems from './draggable';
 
 const DragDropItems = ({
   currentPage,
+  currentStocks,
   financials,
   handleOnDragEnd,
   pageSize,
 }) => (
   <DragDropContext onDragEnd={handleOnDragEnd}>
     <Droppable droppableId="droppable">
-      {provided => (
-        <tbody {...provided.droppableProps} ref={provided.innerRef}>
+      {({ droppableProps, innerRef, placeholder }) => (
+        <tbody {...droppableProps} ref={innerRef}>
           <DraggableItems
             currentPage={currentPage}
+            currentStocks={currentStocks}
             financials={financials}
             pageSize={pageSize}
           />
-          {provided.placeholder}
+          {placeholder}
         </tbody>
       )}
     </Droppable>
@@ -28,6 +30,7 @@ const DragDropItems = ({
 
 DragDropItems.propTypes = {
   currentPage: PropTypes.number,
+  currentStocks: PropTypes.array,
   handleOnDragEnd: PropTypes.func,
   pageSize: PropTypes.number,
   financials: PropTypes.arrayOf(
@@ -43,6 +46,7 @@ DragDropItems.propTypes = {
 
 DragDropItems.defaultProps = {
   currentPage: 1,
+  currentStocks: [],
   handleOnDragEnd: () => {},
   pageSize: 4,
   financials: [],

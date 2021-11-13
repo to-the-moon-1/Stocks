@@ -8,7 +8,7 @@
     "@testing-library/user-event": "12.1.10",
     "axios": "0.21.1",
     "font-awesome": "4.7.0",
-    "prop-types": "^15.7.2",
+    "prop-types": "15.7.2",
     "react": "17.0.2",
     "react-beautiful-dnd": "13.1.0",
     "react-dom": "17.0.2",
@@ -51,8 +51,8 @@
     "eject": "react-scripts eject",
     "lint:styles": "stylelint --syntax css src/**/*.css",
     "lint": "eslint --ext .js,.jsx src",
-    "lint:fix": "yarn lint --fix",
-    "lint:styles:fix": "yarn lint:styles --fix",
+    "lint:fix": "npm run lint --fix",
+    "lint:styles:fix": "npm run lint:styles --fix",
     "format": "prettier \"src/**/*.{js,jsx,yml,yaml,ts,tsx,md,graphql,mdx}\" --write",
     "format:styles": "prettier \"src/**/*.css\" --parser css --write",
     "precommit": "lint-staged"
@@ -62,6 +62,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
   },
   "browserslist": {
     "production": [

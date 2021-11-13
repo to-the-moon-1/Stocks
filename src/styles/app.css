@@ -1,9 +1,9 @@
 :root {
   --font-size: 20px;
   --padding: 15px;
-  --gainsboro: #dcdcdcff;
-  --cyan: #3e7070ff;
-  --darkcyan: #2f4f4fff;
+  --gainsboro: #dcdcff;
+  --cyan: #3e7070;
+  --darkcyan: #2f4f4f;
 }
 
 * {

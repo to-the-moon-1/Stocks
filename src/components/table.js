@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { initialStocks, pageSize } from '../consts/initial-state';
+import { baseStocks, pageSize, headTable } from '../consts/initial-state';
 
 import DragDropItems from './drag-drop';
 
 const Table = ({
   currentPage,
+  currentStocks,
   handleOnDragEnd,
   pageSize,
   stocks: { financials, symbol },
@@ -17,14 +18,16 @@ const Table = ({
       <thead className="thead">
         <tr>
           <td className="col col-head col-number">#</td>
-          <td className="col col-head">Report date</td>
-          <td className="col col-head">Total assets</td>
-          <td className="col col-head">Total cash</td>
-          <td className="col col-head">Total debt</td>
+          {headTable.map(({ name }) => (
+            <td key={name} className="col col-head">
+              {name}
+            </td>
+          ))}
         </tr>
       </thead>
       <DragDropItems
         currentPage={currentPage}
+        currentStocks={currentStocks}
         financials={financials}
         handleOnDragEnd={handleOnDragEnd}
         pageSize={pageSize}
@@ -35,6 +38,7 @@ const Table = ({
 
 Table.propTypes = {
   currentPage: PropTypes.number,
+  currentStocks: PropTypes.array,
   pageSize: PropTypes.number,
   handleOnDragEnd: PropTypes.func,
   stocks: PropTypes.shape({
@@ -53,9 +57,10 @@ Table.propTypes = {
 
 Table.defaultProps = {
   currentPage: 1,
+  currentStocks: [],
   pageSize,
   handleOnDragEnd: () => {},
-  stocks: initialStocks,
+  stocks: baseStocks,
 };
 
 export default Table;

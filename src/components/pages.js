@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { pageSize } from '../consts/initial-state';
 
 import PageNumbers from './page-numbers';
-import NavBtnLeft from './nav-btn-left';
-import NavBtnRight from './nav-btn-right';
+import NavBtn from './nav-btn';
 
 const Pages = ({
   currentPage,
@@ -18,14 +17,14 @@ const Pages = ({
   pageSize,
 }) => (
   <div className="mg-top">
-    <NavBtnLeft onFirstPage={onFirstPage} onPrevPage={onPrevPage} />
+    <NavBtn nav="first" onEnd={onFirstPage} onStep={onPrevPage} side="left" />
     <PageNumbers
       currentPage={currentPage}
       financials={financials}
       onPageChanged={onPageChanged}
       pageSize={pageSize}
     />
-    <NavBtnRight onLastPage={onLastPage} onNextPage={onNextPage} />
+    <NavBtn nav="last" onEnd={onLastPage} onStep={onNextPage} side="right" />
   </div>
 );
 

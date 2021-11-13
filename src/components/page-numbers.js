@@ -5,8 +5,8 @@ import { pageSize } from '../consts/initial-state';
 
 const PageNumbers = ({ currentPage, onPageChanged, pageSize, financials }) => {
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(financials.length / pageSize); i++) {
-    pageNumbers.push(i);
+  for (let num = 1; num <= Math.ceil(financials.length / pageSize); num++) {
+    pageNumbers.push(num);
   }
 
   return (
