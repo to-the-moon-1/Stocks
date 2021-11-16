@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import store from './redux/redux-store';
+import store from './store/redux-store';
 
 import StocksContainer from './container/stocks-container';
 

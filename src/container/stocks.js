@@ -2,36 +2,49 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as axios from 'axios';
 
-import { baseStocks, pageSize, totalPages, URL } from '../consts/initial-state';
+import getDragDropItems from '../utils/get-drag-drop-items';
 
-import Table from './table';
-import Pages from './pages';
+import { baseStocks, pageSize, totalPages } from '../consts/initial-state';
+import URL from '../consts/api';
+
+import Table from '../components/table';
+import Pages from '../components/pages';
 
 const Stocks = ({
   currentPage,
   pageSize,
   setCurrentPage,
   setStocks,
-  setStocksFin,
+  setStocksFinancials,
   stocks,
   totalPages,
 }) => {
   useEffect(() => {
     async function getStocks() {
-      const response = await axios.get(URL);
-      if (response.status === 200) return setStocks(response.data);
-      throw new Error(response.status);
+      try {
+        const response = await axios.get(URL);
+        if (response.status === 200) return setStocks(response.data);
+      } catch (err) {
+        console.error(err); // eslint-disable-line no-console
+      }
+      return null;
     }
     getStocks();
   }, [setStocks]);
 
-  const handleOnDragEnd = ({ destination, source }) => {
-    if (!destination) return;
-    const items = stocks.financials;
-    const [reorderedItem] = items.splice(source.index, 1);
-    items.splice(destination.index, 0, reorderedItem);
-    setStocksFin(items);
+  const handleOnDragEnd = result => {
+    const { financials: items } = stocks;
+    setStocksFinancials(getDragDropItems(items, result));
   };
+
+  const pageNumbers = [];
+  for (
+    let num = 1;
+    num <= Math.ceil(stocks.financials.length / pageSize);
+    num++
+  ) {
+    pageNumbers.push(num);
+  }
 
   const onPageChanged = pageNumber => setCurrentPage(+pageNumber.target.id);
 
@@ -64,13 +77,12 @@ const Stocks = ({
       />
       <Pages
         currentPage={currentPage}
-        financials={stocks.financials}
         onFirstPage={onFirstPage}
         onLastPage={onLastPage}
         onNextPage={onNextPage}
         onPageChanged={onPageChanged}
         onPrevPage={onPrevPage}
-        pageSize={pageSize}
+        pageNumbers={pageNumbers}
       />
     </div>
   );
@@ -82,7 +94,7 @@ Stocks.propTypes = {
   totalPages: PropTypes.number,
   setCurrentPage: PropTypes.func,
   setStocks: PropTypes.func,
-  setStocksFin: PropTypes.func,
+  setStocksFinancials: PropTypes.func,
   stocks: PropTypes.shape({
     symbol: PropTypes.string,
     financials: PropTypes.arrayOf(
@@ -103,7 +115,7 @@ Stocks.defaultProps = {
   totalPages,
   setCurrentPage: () => {},
   setStocks: () => {},
-  setStocksFin: () => {},
+  setStocksFinancials: () => {},
   stocks: baseStocks,
 };
 

@@ -6,6 +6,7 @@ const DraggableItems = ({ currentPage, currentStocks, pageSize }) => (
   <>
     {currentStocks.map(
       ({ id, reportDate, totalAssets, totalCash, totalDebt }, index) => {
+        const bodyTable = [reportDate, totalAssets, totalCash, totalDebt];
         const idBeforeChange = index + pageSize * currentPage - pageSize;
         const idAfterChange = pageSize * currentPage + index - (pageSize - 1);
         return (
@@ -13,10 +14,11 @@ const DraggableItems = ({ currentPage, currentStocks, pageSize }) => (
             {({ draggableProps, dragHandleProps, innerRef }) => (
               <tr {...draggableProps} {...dragHandleProps} ref={innerRef}>
                 <td className="col col-index">{idAfterChange}</td>
-                <td className="col">{reportDate}</td>
-                <td className="col">{totalAssets}</td>
-                <td className="col">{totalCash}</td>
-                <td className="col">{totalDebt}</td>
+                {bodyTable.map(data => (
+                  <td key={data} className="col">
+                    {data}
+                  </td>
+                ))}
               </tr>
             )}
           </Draggable>

@@ -35,7 +35,7 @@ export const setCurrentPage = currentPage => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
-export const setStocksFin = financials => ({
+export const setStocksFinancials = financials => ({
   type: SET_STOCKS_FINANCIALS,
   financials,
 });

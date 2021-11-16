@@ -1,5 +1,5 @@
 import { combineReducers, compose, createStore } from 'redux';
-import stocksReducer from './stocks-reducer';
+import stocksReducer from '../reducers/stocks-reducer';
 
 const reducers = combineReducers({
   stocksPage: stocksReducer,
